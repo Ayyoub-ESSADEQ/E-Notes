@@ -3,7 +3,7 @@ import sequelize from './connection.js';
 
 //Here I define the table of Prof
 
-sequelize.define('Module',{
+const Module = sequelize.define('Module',{
     name:{
         type:DataTypes.STRING
     },
@@ -24,3 +24,5 @@ sequelize.define('Module',{
         freezeTableName:true
     }
 )
+
+export default Module;

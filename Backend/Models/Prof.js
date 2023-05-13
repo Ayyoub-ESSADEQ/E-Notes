@@ -3,7 +3,7 @@ import sequelize from './connection.js'
 
 //Here I define the table of Prof
 
-sequelize.define('Prof',{
+const Prof = sequelize.define('Prof',{
     idProf:{
         type:DataTypes.INTEGER,
         autoIncrement:true,
@@ -26,3 +26,5 @@ sequelize.define('Prof',{
         freezeTableName:true
     }
 )
+
+export default Prof;

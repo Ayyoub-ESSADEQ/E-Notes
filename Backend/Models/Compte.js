@@ -3,7 +3,7 @@ import sequelize from './connection.js'
 
 //Here I define the table of Comptes
 
-sequelize.define('Compte',{
+const Compte = sequelize.define('Compte',{
     username:{
         type:DataTypes.STRING,
         unique:true,
@@ -24,3 +24,6 @@ sequelize.define('Compte',{
         freezeTableName:true
     }
 )
+
+
+export default Compte;
