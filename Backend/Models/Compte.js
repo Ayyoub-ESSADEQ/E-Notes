@@ -7,7 +7,8 @@ const Compte = sequelize.define('Compte',{
     username:{
         type:DataTypes.STRING,
         unique:true,
-        primaryKey:true
+        primaryKey:true,
+        get(){return this.getDataValue("username")}
     },
     password:{
         type:DataTypes.STRING
@@ -24,6 +25,5 @@ const Compte = sequelize.define('Compte',{
         freezeTableName:true
     }
 )
-
 
 export default Compte;
