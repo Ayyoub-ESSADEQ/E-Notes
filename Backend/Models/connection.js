@@ -1,8 +1,6 @@
-import { Sequelize } from 'sequelize';
-
 //Establishing connection to the database
 //databaseName-Username-Password are the arguments
-
+const Sequelize = require('sequelize').Sequelize;
 const sequelize = new Sequelize('eNotes','root','ayoube essadeq',{
     host:'localhost',
     dialect : 'mysql',
@@ -14,4 +12,4 @@ const sequelize = new Sequelize('eNotes','root','ayoube essadeq',{
 /*
 sequelize.sync({force:true})
 */
-export default sequelize;
+module.exports = sequelize;

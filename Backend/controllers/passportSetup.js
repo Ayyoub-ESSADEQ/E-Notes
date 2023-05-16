@@ -1,11 +1,13 @@
-var localStrategy = require('passport-local').Strategy;
-var session = require("express-session");
-var flash = require("connect-flash");
-var cookieParser = require("cookie-parser");
-
+const localStrategy = require('passport-local').Strategy;
+const session = require("express-session");
+const flash = require("connect-flash");
+const cookieParser = require("cookie-parser");
+const passport = require("passport"); 
+const User = require("../Models/Compte"); 
+const express= require('express');
+const verify = require('./login')
 const app = express();
-var passport = require("passport")
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 
 //..
 app.use(bodyParser.urlencoded({extended:false}));
@@ -13,13 +15,25 @@ app.use(cookieParser());
 app.use(session({
 	secret : "TKRv0IJs=HYqrvagQ#&!F!%V]Ww/4KiVs$s,<<MX" /*any random sentenct to encrypt the user cookies*/,
 	resave : true,
-	saveUninitialized : true
+	saveUninitialized : false
 }));
 
-
-//..
-//..
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash())
+
+passport.use(new localStrategy(verify))
+
+
+
+module.exports = function() { 
+	passport.serializeUser(function(user, done) { 
+		done(null, user._id); 
+		}); 
+	passport.deserializeUser(async function(id, done) { 
+		await User.findByPk(id).then(function(err, user) { 
+			done(err, user); 
+		}); 
+	}); 
+};

@@ -1,16 +1,17 @@
-import Compte from '../Models/Compte.js';
+const Compte =require('../Models/Compte.js')
 
-export default async function verify(username, password){
+module.exports = async function verify(username, password, done){
     const user = await Compte.findOne({where:{username:username}})
-    .then((user,err)=>{
+    .then((user)=>{
         if(!user){
-            return false;
+            return done(null, false,{message:"No user has that username !"})
         }
         else{
-            if(user.password===password) return true;
-            else return false;
+            if(user.password===password) return done(null,user);
+            else done(null,false,{message:"Invalid password"});
         }
-    });
+    })
+    .catch(err=>{done(err)});
 
     return user;
 
