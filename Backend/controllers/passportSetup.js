@@ -10,6 +10,7 @@ const app = express();
 const bodyParser = require("body-parser");
 
 //..
+app.use(flash());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(cookieParser());
 app.use(session({
@@ -21,19 +22,16 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash())
 
-passport.use(new localStrategy(verify))
-
-
+passport.use("local",new localStrategy(verify))
 
 module.exports = function() { 
 	passport.serializeUser(function(user, done) { 
-		done(null, user._id); 
+		done(null, user.username); 
 		}); 
 	passport.deserializeUser(async function(id, done) { 
-		await User.findByPk(id).then(function(err, user) { 
-			done(err, user); 
-		}); 
+		await User.findByPk(id).then(function(user,error){
+			done(error, user); 
+		})
 	}); 
 };

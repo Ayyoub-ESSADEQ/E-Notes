@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import sequelize from './connection.js';
+const DataTypes = require('sequelize').DataTypes;
+const sequelize = require('./connection.js');
+
 
 //Here I define the table of FiliereCours
 
@@ -29,4 +30,4 @@ const FiliereModule = sequelize.define('FiliereModule',{
     }
 )
 
-export default FiliereModule;
+module.exports = FiliereModule;

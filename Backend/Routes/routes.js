@@ -1,23 +1,36 @@
 const passport = require('passport');
 const express = require('express');
+const session = require('express-session')
 const path = require('path');
 const router = express.Router();
 
 
+
+router.use(session({
+	secret : "TKRv0IJs=HYqrvagQ#&!F!%V]Ww/4KiVs$s,<<MX" /*any random sentenct to encrypt the user cookies*/,
+	resave : true,
+	saveUninitialized : false
+}))
+
 router.get('/login', function(req,res){
-    console.log('Hello world')
     res.sendFile(path.resolve(__dirname+'/../Views/login.html'));
 })
 
 router.post('/logging', passport.authenticate("local", {
     successRedirect: "/profile",
-    failureRedirect: "/",
+    failureRedirect: "/login",
     failureFlash: true
     }))
 
+router.use(passport.initialize());
+router.use(passport.session());
+
 router.get('/profile',ensureAuthenticated,function(req,res){
-    res.end('You did a great Job');
+    console.log(req.user)
+    res.sendFile(path.resolve(__dirname+'/../Views/profile.html'));
 })
+
+    
 
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {

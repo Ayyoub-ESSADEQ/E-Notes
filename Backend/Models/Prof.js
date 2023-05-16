@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize';
-import sequelize from './connection.js'
+const DataTypes = require('sequelize').DataTypes;
+const sequelize = require('./connection.js');
 
 //Here I define the table of Prof
 
@@ -27,4 +27,4 @@ const Prof = sequelize.define('Prof',{
     }
 )
 
-export default Prof;
+module.exports = Prof;
