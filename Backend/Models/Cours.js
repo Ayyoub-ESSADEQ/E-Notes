@@ -1,7 +1,7 @@
 const DataTypes = require('sequelize').DataTypes;
 const sequelize = require('./connection.js');
 
-//Here I define the table of Prof
+//Here I define the table of Lessons
 
 const Cours = sequelize.define('Cours',{
     idCours:{
@@ -11,13 +11,6 @@ const Cours = sequelize.define('Cours',{
     },
     name:{
         type:DataTypes.STRING
-    },
-    idProf:{                        //This is to show the prof that is responsible for a lesson
-        type:DataTypes.INTEGER,
-        references:{
-            model:"Prof",
-            key:"idProf"
-        }
     },
     idModule:{
         type:DataTypes.INTEGER,
