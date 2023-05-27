@@ -27,8 +27,7 @@ router.get('/profile',ensureAuthenticated,function(req,res){
     res.sendFile(path.resolve(__dirname+'/../Views/profile.html'));
 })
 
-router.post('/logout', function(req, res, next) {
-    console.log('hello world')
+router.get('/logout', function(req, res, next) {
     req.logout(function(err) {
       if (err) { return next(err); }
       res.redirect('/login');
@@ -39,7 +38,6 @@ function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         next(); 
     } else {
-        req.flash("info", "You must be logged in to see this page.");
         res.redirect("/login");
     }
 }

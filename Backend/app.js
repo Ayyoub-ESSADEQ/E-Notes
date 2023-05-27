@@ -1,4 +1,4 @@
-const setUpPassport = require("./controllers/passportSetup.js");
+const setUpPassport = require("./Utilities/passportSetup.js");
 const express = require('express');
 const path = require('path');
 const app = express();

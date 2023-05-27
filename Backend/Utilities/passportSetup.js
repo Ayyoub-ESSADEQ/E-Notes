@@ -9,7 +9,6 @@ const verify = require('./login')
 const app = express();
 const bodyParser = require("body-parser");
 
-//..
 app.use(flash());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(cookieParser());
@@ -18,7 +17,6 @@ app.use(session({
 	resave : true,
 	saveUninitialized : false
 }));
-
 
 app.use(passport.initialize());
 app.use(passport.session());

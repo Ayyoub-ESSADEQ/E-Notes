@@ -1,31 +1,23 @@
 const DataTypes = require('sequelize').DataTypes;
 const sequelize = require('./connection.js');
 
-//Here I define the table of Notes
+//Here I define the table of ProfCours
+//idProf le prof résponsable de cours idCours
 
-const Notes = sequelize.define('Notes',{
-    idNote:{
+const ProfCours = sequelize.define('ProfCours',{
+    idProfCours:{
         type:DataTypes.INTEGER,
         autoIncrement:true,
         primaryKey:true
-    },
-    Seance:{
-        type:DataTypes.INTEGER
-    },
-    Note:{
-        type:DataTypes.STRING //La note de professeur
     }, 
-    anneUniversitaire:{
-        type:DataTypes.INTEGER //La note de professeur
-    },   
-    idProf:{                        //le prof qui a réaliser la note
+    idProf:{                        
         type:DataTypes.INTEGER,
         references:{
             model:"Prof",
             key:"idProf"
         }
     },
-    idCours:{                        //le cours où la note s'inscrit
+    idCours:{
         type:DataTypes.INTEGER,
         references:{
             model:"Cours",
@@ -38,4 +30,4 @@ const Notes = sequelize.define('Notes',{
     }
 )
 
-module.exports = Notes;
+module.exports = ProfCours;

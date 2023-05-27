@@ -12,12 +12,8 @@ const Cours = sequelize.define('Cours',{
     name:{
         type:DataTypes.STRING
     },
-    idModule:{
-        type:DataTypes.INTEGER,
-        references:{
-            model:"Module",
-            key:"idModule"
-        }
+    Filliére:{
+        type:DataTypes.STRING,
     }
     },
     {
