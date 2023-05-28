@@ -1,5 +1,5 @@
 const DataTypes = require('sequelize').DataTypes;
-const sequelize = require('./connection.js');
+const sequelize = require('../Utilities/connection');
 
 //Here I define the table of Comptes
 

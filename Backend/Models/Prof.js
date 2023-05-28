@@ -1,5 +1,5 @@
 const DataTypes = require('sequelize').DataTypes;
-const sequelize = require('./connection.js');
+const sequelize = require('../Utilities/connection.js');
 
 //Here I define the table of Prof
 
@@ -9,11 +9,12 @@ const Prof = sequelize.define('Prof',{
         autoIncrement:true,
         primaryKey:true
     },
-    profession:{
+    filiere:{
         type:DataTypes.STRING
     },
-    role:{
-        type:DataTypes.STRING //one of : professeur-cordFiliere-cordMod-adjoint
+    coordinateurFiliere:{
+        type:DataTypes.STRING,
+        defaultValue:'aucun'
     },
     name:{
         type:DataTypes.STRING

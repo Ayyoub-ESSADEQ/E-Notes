@@ -1,5 +1,5 @@
 const DataTypes = require('sequelize').DataTypes;
-const sequelize = require('./connection.js');
+const sequelize = require('../Utilities/connection.js');
 
 //Ici je définis la table de seances
 

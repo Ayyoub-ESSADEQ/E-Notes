@@ -1,5 +1,5 @@
 const DataTypes = require('sequelize').DataTypes;
-const sequelize = require('./connection.js');
+const sequelize = require('../Utilities/connection.js');
 
 //Here I define the table of ProfCours
 //idProf le prof résponsable de cours idCours

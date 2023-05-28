@@ -24,6 +24,7 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 router.get('/profile',ensureAuthenticated,function(req,res){
+    console.log(req.user);
     res.sendFile(path.resolve(__dirname+'/../Views/profile.html'));
 })
 
