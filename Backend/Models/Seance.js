@@ -8,15 +8,22 @@ const Seance = sequelize.define('Seance',{
         type:DataTypes.INTEGER,
         autoIncrement:true,
         primaryKey:true
+    }, 
+    idProf:{                        
+        type:DataTypes.INTEGER,
+        references:{
+            model:"Prof",
+            key:"idProf"
+        }
     },
     Date:{
         type:DataTypes.STRING
     },
     startAt:{
-        type:DataTypes.STRING //La date de début de cours
+        type:DataTypes.STRING //The hour where the session start
     }, 
     endAt:{
-        type:DataTypes.STRING //La date de fin de cours
+        type:DataTypes.STRING ////The hour where the session end
     }, 
     objectif:{
         type:DataTypes.STRING  

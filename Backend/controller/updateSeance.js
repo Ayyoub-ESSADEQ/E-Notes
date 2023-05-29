@@ -1,7 +1,7 @@
 const seance = require('../Models/Seance');
 
 module.exports = async function(req,res,next){
-    const idSeance = req.query.seance;
+    const idSeance = req.query.idSeance;
     let updateSeance = await seance.findOne({
         where:{
             idSeance: idSeance

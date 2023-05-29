@@ -14,7 +14,7 @@ router.get('/login', function(req,res){
     res.sendFile(path.resolve(__dirname+'/../Views/login.html'));
 })
 
-router.post('/logging', passport.authenticate("local", {
+router.post('/logging',passport.authenticate("local", {
     successRedirect: "/profile",
     failureRedirect: "/login",
     failureFlash: true

@@ -23,14 +23,7 @@ const CoursSeance = sequelize.define('CoursSeance',{
             model:"Cours",
             key:"idCours"
         }
-    },
-    idProf:{
-        type:DataTypes.INTEGER,
-        references:{
-            model:"Prof",
-            key:"idProf"
-        }
-    },
+    }
     },
     {
         freezeTableName:true
