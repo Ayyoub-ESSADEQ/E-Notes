@@ -7,9 +7,8 @@ const { Op } = require('sequelize');
  * the on attribute represents the junction table
  * the id attribute is on which the junction will be preformed
  * In brief : the function answers this question : 
- * >>>What are the elements of target associated with the element of Source of id="id"
+ * >>>What are the elements of target according to the junction table
  * @param {Object} options - The options object represent the holder of the informations needed to retrieve the data from the junction between the source & target
- * @param {Object} source - the Model that contain the element asking for the target
  * @param {Onject} target - the Model from where we want to retrieve the iformation
  * @param {Object} on - the junction table between source and the target
  * @param {Object} where - contains the condition for our query
@@ -19,22 +18,17 @@ const { Op } = require('sequelize');
  */
 
 function join(options){
-    const source = options.source;
     const target = options.target;
     const on = options.on;
     const where = options.where;
-    const id = where.id;
-    const targetedAttributes = where.attributes;
-    const whereOptions = {};
-    const idSource = source.primaryKeyAttribute;
+    const targetedAttributes = options.attributes;
     const idTarget = target.primaryKeyAttribute;
-    whereOptions[idSource] = id;
 
     const information = new Promise(getInformations);
     function getInformations(resolve,reject){
         const junctionData = on.findAll({
             attributes :[idTarget],
-            where:whereOptions,
+            where:where,
             raw:true
         });
     
@@ -44,13 +38,14 @@ function join(options){
         function retrieveData(data){
             data.forEach((v,i)=>{data[i]=v[idTarget]});
             const whereOptions = {};
-            whereOptions[idTarget] = {[Op.in]:data}
+            const optionsWhere = {};
+            whereOptions[idTarget] = {[Op.in]:data};
+            optionsWhere[where] = whereOptions;
+            optionsWhere.raw = true;
+
+            if(targetedAttributes) optionsWhere["attributes"] = targetedAttributes;
     
-            const dataTarget = target.findAll({
-                attributes : targetedAttributes,
-                where:whereOptions,
-                raw:true
-            })
+            const dataTarget = target.findAll(optionsWhere);
     
             dataTarget.then((results)=>{resolve(results)});
             dataTarget.catch(()=>{reject('Un erreur est produit')})

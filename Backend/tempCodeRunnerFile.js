@@ -1,2 +1,1 @@
-
-    console.log(cours);
+2

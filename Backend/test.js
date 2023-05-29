@@ -1,17 +1,40 @@
-const lessons = require('./Models/Cours');
-const teachers = require('./Models/Prof');
-const junction = require('./Models/ProfCours');
 
-const join = require('./Utilities/join');
+const sessions = require('./Models/Seance')
+const lessonsSessions = require('./Models/CoursSeance');
+//path : /Cours/:idCours/Seances/:idSeance
 
-const data = join({
-    source : teachers,
-    target : lessons,
-    on : junction,
+const belongs = lessonsSessions.findOne({
+    attributes : ["idCoursSeance"],
     where:{
-        id : 1,
-        attributes : ["name","idCours"]
-    } 
+        idProf : 1,
+        idSeance : 1,
+        idCours : 4
+    },
+    raw : true
 })
 
-data.then((r)=>{console.log(r)})
+belongs.then(removeSeance)
+belongs.catch()
+
+function removeSeance(verdict){
+    if (verdict) {
+        lessonsSessions.destroy({
+            where:{
+                idCoursSeance : belongs.idCoursSeance
+            }
+        }).then(()=>{
+            sessions.destroy({
+                where:{
+                    idSeance:1
+                    }
+                }
+            )
+        })
+
+    }
+    else{
+        console.log('You are not allowed to delete this Sessions')
+    }
+}
+
+
