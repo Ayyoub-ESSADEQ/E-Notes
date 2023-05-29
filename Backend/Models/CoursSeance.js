@@ -20,6 +20,7 @@ const CoursSeance = sequelize.define('CoursSeance',{
     },
     idCours:{
         type:DataTypes.INTEGER,
+        onDelete: 'CASCADE',
         references:{
             model:"Cours",
             key:"idCours"
@@ -27,6 +28,7 @@ const CoursSeance = sequelize.define('CoursSeance',{
     },
     idProf:{
         type:DataTypes.INTEGER,
+        onDelete: 'CASCADE',
         references:{
             model:"Prof",
             key:"idProf"
