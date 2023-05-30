@@ -1,21 +1,21 @@
-const session = require('../Models/Seance')
+const sessions = require('../Models/Seance');
+const lessonSession = require('../Models/CoursSeance');
 
 function retrieveSessionsContent(req,res,next){
-    const idSeance = req.query.idSeance;
-    session.findOne({
-        attributes:{exclude:['idSeance']},
+    const idSeance = req.params.idSeance;
+    const idProf = req.params.idProf || req.user.idProf;
+    const idCours = req.params.idCours;
+
+    lessonSession.findOne({
         where:{
+            idCours:idCours,
+            idProf:idProf,
             idSeance:idSeance
-        },
-        raw:true
+        }
+    }).then(content=>{
+        if(content!==null) sessions.findByPk(idSeance).then(contents=>res.send(contents));
+        else res.send('cette seance ne vous correspond pas')
     })
-        .then((contents)=>{
-            if (contents.idProf === req.user.idProf) res.json(contents);
-            else res.send("cette session ne vous correspond pas");
-            })
-        .catch(()=>{res.send("un erreur est produit")});
-    next();
-    
 }
 
 module.exports = retrieveSessionsContent;

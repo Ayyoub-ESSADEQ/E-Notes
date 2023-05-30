@@ -12,7 +12,6 @@ const { Op } = require('sequelize');
  * @param {Onject} target - the Model from where we want to retrieve the iformation
  * @param {Object} on - the junction table between source and the target
  * @param {Object} where - contains the condition for our query
- * @param {Integer} id - is the id of the source asking for the data
  * @param {List} attributes - a list of the attributes we want to retrieve from the target
  * @author Ayyoub Essadeq
  */

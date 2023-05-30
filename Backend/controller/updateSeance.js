@@ -2,7 +2,6 @@
 const sessions = require('../Models/Seance')
 const lessonsSessions = require('../Models/CoursSeance');
 
-//path : /Cours/:idCours/Seances/:idSeance
 
 function updateThisSeance(req,res,next){
     const idProf = req.user.idProf;
