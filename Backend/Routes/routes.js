@@ -12,6 +12,7 @@ const addSession = require('../controller/addSession');
 const removeSession = require('../controller/removeSession');
 const updateSession = require('../controller/updateSeance');
 const retrieveLessonsTeacher = require('../controller/retrieveLessonTeacher');
+const isCoordinator = require('../controller/isCoordinator');
 
 router.use(session({
 	secret : "TKRv0IJs=HYqrvagQ#&!F!%V]Ww/4KiVs$s,<<MX" /*any random sentenct to encrypt the user cookies*/,
@@ -20,6 +21,7 @@ router.use(session({
 }))
 
 router.get('/login', function(req,res){
+    
     res.sendFile(path.resolve(__dirname+'/../Views/login.html'));
 })
 
@@ -34,6 +36,7 @@ router.use(passport.session());
 
 
 //Retrieving Informations for a normal teacher
+router.get('/isCoordinator',ensureAuthenticated,isCoordinator) // to verify if the prof is a coordinator
 router.get('/Cours',retrieveMyLessons);
 router.get('/Cours/:idCours',ensureAuthenticated,retrieveLessonSessions);
 router.get('/Cours/:idCours/Seance/:idSeance',ensureAuthenticated,retrieveSessionContent);
