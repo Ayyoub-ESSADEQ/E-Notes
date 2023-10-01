@@ -39,11 +39,6 @@ Dans la couche modèle de notre application, nous utilisons plusieurs modèles q
 6.	CoursSeance : Le modèle "CoursSeance" est une relation entre les modèles "Cours" et "Séance". Il représente l'association d'une séance de cours à un cours spécifique. Ce modèle permet de gérer les relations entre les cours et les séances, notamment pour la planification et la récupération des informations associées.
 
 Ces différents modèles dans la couche modèle de notre application nous permettent de structurer et de gérer efficacement les données liées aux professeurs, aux comptes utilisateur, aux cours et aux séances. Chaque modèle joue un rôle spécifique dans notre système, contribuant ainsi à la logique métier et à la manipulation des données de manière cohérente et organisée.
-
-Voici une implémentation du modèle « Séance » en utilisant le module « Sequelize » :
- 
-Le code fourni présente un module Sequelize qui définit le modèle d'un professeur (`Prof`). Sequelize est un ORM (Object-Relational Mapping) pour Node.js, qui facilite l'interaction avec les bases de données relationnelles. Ce module utilise les fonctionnalités de Sequelize pour définir les attributs d'un professeur, tels que son identifiant, sa filière, son coordinateur de filière, son nom et son prénom. Chaque attribut est associé à un type de données spécifique, tel que `INTEGER` et `STRING`, et peut avoir des valeurs par défaut. De plus, le module inclut des configurations supplémentaires, comme le gel de la table correspondante en utilisant `freezeTableName:true`. Cette structure de code permet de créer et manipuler facilement des objets Prof dans une base de données relationnelle en utilisant Sequelize.
-
  
 Nous avons également créé un utilitaire appelé `connection.js` qui facilite la connexion à la base de données en utilisant le pilote MySQL2. Cette fonction utilitaire nous permet d'éviter la répétition de code chaque fois que nous souhaitons créer un modèle Sequelize.
 
@@ -52,7 +47,7 @@ La fonction `connection.js` contient la configuration nécessaire pour établir 
 En utilisant `connection.js`, nous importons la connexion établie dans notre module `Prof`, ce qui nous permet de l'utiliser directement pour créer notre modèle de professeur. Cette approche modulaire améliore la lisibilité du code, facilite la maintenance et favorise la réutilisation des connexions à la base de données dans d'autres modules.
 
 En résumé, grâce à la fonction utilitaire `connection.js`, nous avons centralisé la logique de connexion à la base de données, ce qui nous permet de créer facilement des modèles Sequelize sans répéter le code de connexion à chaque fois.
-III.	Les contrôleurs utilisés dans le projet :
+## III.	Les contrôleurs utilisés dans le projet :
 Dans la couche de contrôle de notre application, nous avons mis en place différents contrôleurs qui jouent un rôle central dans la gestion des actions et des interactions entre les utilisateurs, les modèles et les vues. Ces contrôleurs sont responsables de l'exécution des différentes fonctionnalités de notre application et de la coordination des opérations nécessaires pour répondre aux demandes des utilisateurs. Voici une brève introduction de certains des contrôleurs que nous utilisons :
 
 1.	retrieveMyLesson : Ce contrôleur est chargé de récupérer les leçons associées à un utilisateur spécifique. Il interagit avec le modèle "Cours" et récupère les cours attribués à l'utilisateur actuel. Ce contrôleur est utilisé pour afficher les leçons personnalisées d'un utilisateur, facilitant ainsi son accès aux cours auxquels il est inscrit.
@@ -65,13 +60,9 @@ Dans la couche de contrôle de notre application, nous avons mis en place diffé
 4.	updateSession : Ce contrôleur est chargé de mettre à jour les détails d'une séance de cours existante. Il reçoit les informations mises à jour, telles que la date, l'heure ou la durée, et les applique au modèle "Seance". Ce contrôleur assure également la synchronisation des informations avec les autres composants liés, tels que les vues et les modèles associés.
 
 Ces contrôleurs, parmi d'autres, jouent un rôle essentiel dans le flux de travail de notre application. Ils permettent d'intercepter les demandes des utilisateurs, de coordonner les opérations nécessaires dans les modèles correspondants et de mettre à jour les vues en conséquence. En utilisant ces contrôleurs, nous assurons une manipulation cohérente et structurée des données, tout en offrant une expérience utilisateur fluide et réactive.
-Voici une implémentation du contrôleur « removeSession » : 
-
-
- 
 
  
-Ce code présente un contrôleur permettant de supprimer une session dans un contexte spécifique. Le contrôleur utilise les modèles Sequelize `sessions` et `lessonsSessions` pour interagir avec la base de données. 
+L'implémentation « removeSession » : présente un contrôleur permettant de supprimer une session dans un contexte spécifique. Le contrôleur utilise les modèles Sequelize `sessions` et `lessonsSessions` pour interagir avec la base de données. 
 
 Lorsqu'une requête de suppression de session est reçue, le contrôleur commence par vérifier si l'utilisateur connecté est autorisé à supprimer la session. Il effectue cette vérification en utilisant les attributs `idProf`, `idCours` et `idSeance` provenant des paramètres de la requête et en interrogeant la table `lessonsSessions`.
 
