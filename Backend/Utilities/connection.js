@@ -1,7 +1,7 @@
 //Establishing connection to the database
 //databaseName-Username-Password are the arguments
 const Sequelize = require('sequelize').Sequelize;
-const sequelize = new Sequelize('eNotes','root','ayoube essadeq',{
+const sequelize = new Sequelize('eNotes','/*username*/','/*password*/',{
     host:'localhost',
     dialect : 'mysql',
     port:3306
